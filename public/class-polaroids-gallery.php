@@ -2,7 +2,7 @@
 /**
  * Plugin Name.
  *
- * @package   Plugin_Name
+ * @package   Polaroids_Gallery
  * @author    Your Name <email@example.com>
  * @license   GPL-2.0+
  * @link      http://example.com
@@ -14,14 +14,17 @@
  * public-facing side of the WordPress site.
  *
  * If you're interested in introducing administrative or dashboard
- * functionality, then refer to `class-plugin-name-admin.php`
+ * functionality, then refer to `class-polaroids-gallery-admin.php`
  *
  * @TODO: Rename this class to a proper name for your plugin.
  *
- * @package Plugin_Name
+ * @package Polaroids_Gallery
  * @author  Your Name <email@example.com>
  */
-class Plugin_Name {
+
+
+
+class Polaroids_Gallery {
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
@@ -30,10 +33,10 @@ class Plugin_Name {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '0.0.1';
 
 	/**
-	 * @TODO - Rename "plugin-name" to the name your your plugin
+	 * @TODO - Rename "polaroids-gallery" to the name your your plugin
 	 *
 	 * Unique identifier for your plugin.
 	 *
@@ -46,7 +49,7 @@ class Plugin_Name {
 	 *
 	 * @var      string
 	 */
-	protected $plugin_slug = 'plugin-name';
+	protected $plugin_slug = 'polaroids-gallery';
 
 	/**
 	 * Instance of this class.
@@ -75,10 +78,15 @@ class Plugin_Name {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
-		/* Define custom functionality.
-		 * Refer To http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-		 */
-		add_action( '@TODO', array( $this, 'action_method_name' ) );
+
+		//add_action( 'init', array( $this, 'add_slider_post_type' ) );
+		
+
+		add_action( 'manage_edit-group_columns', array( $this, 'group_column_header'),10,1 );
+		add_action( 'manage_group_custom_column', array( $this, 'group_column_value'),10,3 );
+
+
+
 		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
 	}
@@ -288,21 +296,35 @@ class Plugin_Name {
 	 *
 	 * @since    1.0.0
 	 */
-	public function action_method_name() {
-		// @TODO: Define your action hook callback here
+	public function add_slider_post_type() {
+
+
+
 	}
 
-	/**
-	 * NOTE:  Filters are points of execution in which WordPress modifies data
-	 *        before saving it or sending it to the browser.
-	 *
-	 *        Filters: http://codex.wordpress.org/Plugin_API#Filters
-	 *        Reference:  http://codex.wordpress.org/Plugin_API/Filter_Reference
-	 *
-	 * @since    1.0.0
-	 */
-	public function filter_method_name() {
-		// @TODO: Define your filter hook callback here
-	}
+	public function group_column_header($columns)  
+	{  
+		unset($columns['description']);
+		unset($columns['slug']);
+		
+	    $columns['shortcode'] = __('Shortcode', 'my_plugin');  
+
+	    return $columns;  
+	} 
+
+
+	function group_column_value($empty = '', $custom_column, $term_id)   
+	{  
+		switch ($custom_column) {
+			case 'shortcode':
+				echo '[slider -'.$term_id.' ]';
+			break;
+
+		}
+	} 
+
+
+
+
 
 }
