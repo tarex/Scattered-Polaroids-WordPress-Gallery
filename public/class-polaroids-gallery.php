@@ -75,6 +75,7 @@ class Polaroids_Gallery {
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
 		// Load public-facing style sheet and JavaScript.
+
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
@@ -90,6 +91,10 @@ class Polaroids_Gallery {
 		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
 
 	}
+
+
+
+
 
 	/**
 	 * Return the plugin slug.
@@ -278,12 +283,24 @@ class Polaroids_Gallery {
 		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
 	}
 
+
+
+
+
 	/**
 	 * Register and enqueues public-facing JavaScript files.
 	 *
 	 * @since    1.0.0
 	 */
+
+	public function load_mod() {
+	    wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/modernizr.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+	}
+
+
 	public function enqueue_scripts() {
+		
+
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
 	}
 
@@ -304,10 +321,16 @@ class Polaroids_Gallery {
 
 	public function group_column_header($columns)  
 	{  
+
 		unset($columns['description']);
 		unset($columns['slug']);
+
 		
-	    $columns['shortcode'] = __('Shortcode', 'my_plugin');  
+		
+		$columns['name'] = __('Name', 'my_plugin');  
+	    $columns['shortcode'] = __('Shortcode', 'my_plugin');
+	      
+	    $columns['description'] = __('Description', 'my_plugin'); 
 
 	    return $columns;  
 	} 
@@ -317,7 +340,7 @@ class Polaroids_Gallery {
 	{  
 		switch ($custom_column) {
 			case 'shortcode':
-				echo '[slider -'.$term_id.' ]';
+				echo '[tpslider  id="'.$term_id.'"]';
 			break;
 
 		}

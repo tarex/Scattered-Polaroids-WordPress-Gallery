@@ -52,14 +52,201 @@ $slider  = new Cuztom_Post_Type( 'slider', array(
     "menu_position" => 82,
    // "menu_icon" => get_stylesheet_directory_uri() . "/assets/img/icon-clip.png",
     'has_archive' => true,
-    'supports' => array( 'thumbnail', )
+    'supports' => array('title','thumbnail', )
 ) );
 
 $slider->add_taxonomy( 'group');
 
+$slider->add_meta_box( 
+   'pslider',
+   'Options', 
+    array(
+        array(
+            'name'          => 'bighead',
+            'label'         => 'Page Heading',
+            'description'   => 'Add a large Concise Heading',
+            'type'          => 'text'
+         ),
+         array(
+            'name'          => 'bigdescription',
+            'label'         => 'Page Description',
+            'description'   => 'Add a large Concise sub Heading',
+            'type'          => 'textarea'
+         ),
 
 
 
+
+
+      )
+   );
+
+
+
+
+
+
+
+
+function slider_shortcode( $atts ) {
+	ob_start();
+	 
+		extract($atts);
+
+?>
+<section id="photostack-1" class="photostack photostack-start">
+				<div>
+					<figure>
+						<a href="http://goo.gl/Qw3ND4" class="photostack-img"><img src="http://placehold.it/250x250" alt="img01"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Serenity Beach</h2>
+						</figcaption>
+					</figure>
+					<figure>
+						<a href="http://goo.gl/fhwlSP" class="photostack-img"><img src="http://placehold.it/250x250" alt="img02"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Happy Days</h2>
+						</figcaption>
+					</figure>
+					<figure>
+						<a href="http://goo.gl/Jmvr4u" class="photostack-img"><img src="http://placehold.it/250x250" alt="img03"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Beautywood</h2>
+						</figcaption>
+					</figure>
+					<figure>
+						<a href="http://goo.gl/49lN3k" class="photostack-img"><img src="http://placehold.it/250x250" alt="img04"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Heaven of time</h2>
+						</figcaption>
+					</figure>
+					<figure>
+						<a href="http://goo.gl/NJ1Dhf" class="photostack-img"><img src="http://placehold.it/250x250" alt="img05"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Speed Racer</h2>
+						</figcaption>
+					</figure>
+					<figure>
+						<a href="http://goo.gl/Ms7VDl" class="photostack-img"><img src="http://placehold.it/250x250" alt="img06"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Forever this</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img07"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Lovely Green</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img08"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Wonderful</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img09"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Love Addict</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img10"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Friendship</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img11"/></a>
+						<figcaption>
+							<h2 class="photostack-title">White Nights</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img12"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Serendipity</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img13"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Pure Soul</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img14"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Winds of Peace</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img15"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Shades of blue</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img16"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Lightness</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img10"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Friendship</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img11"/></a>
+						<figcaption>
+							<h2 class="photostack-title">White Nights</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img12"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Serendipity</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img13"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Pure Soul</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img14"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Winds of Peace</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img15"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Shades of blue</h2>
+						</figcaption>
+					</figure>
+					<figure data-dummy>
+						<a href="#" class="photostack-img"><img src="http://placehold.it/250x250" alt="img16"/></a>
+						<figcaption>
+							<h2 class="photostack-title">Lightness</h2>
+						</figcaption>
+					</figure>
+				</div>
+			</section>
+
+<?php
+
+	echo $id;
+
+
+	 return ob_get_clean();
+
+
+}
+add_shortcode( 'tpslider','slider_shortcode' );
 
 
 
