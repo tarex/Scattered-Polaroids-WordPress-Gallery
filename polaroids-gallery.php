@@ -39,7 +39,38 @@ define('PLUG', plugin_dir_path( __FILE__ ) );
 
 
 
+
+// wp_register_script('new_service', PLUG . '/public/assets/js/modernizr.js', array('jquery'), false, false);
+// wp_enqueue_script('new_service');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-polaroids-gallery.php' );
+
+
+
+
+
+
+
+
+
 
 
 
@@ -73,10 +104,6 @@ $slider->add_meta_box(
             'description'   => 'Add a large Concise sub Heading',
             'type'          => 'textarea'
          ),
-
-
-
-
 
       )
    );

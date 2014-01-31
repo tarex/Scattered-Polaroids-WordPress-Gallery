@@ -581,6 +581,8 @@
 				}
 			} );
 
+	// $('.photostack').Photostack();
+
 	});
 
 }(jQuery));

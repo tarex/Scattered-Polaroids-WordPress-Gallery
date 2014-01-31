@@ -70,25 +70,21 @@ class Polaroids_Gallery {
 
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
+		add_filter('language_attributes', array( $this ,'add_mordernizr' ) );
 
 		// Activate plugin when new blog is added
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
-		// Load public-facing style sheet and JavaScript.
-
+		// add stylesheet
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
-
-		//add_action( 'init', array( $this, 'add_slider_post_type' ) );
-		
+		add_action( 'wp_enqueue_scripts', array( $this,'add_custom_scripts') );
 
 		add_action( 'manage_edit-group_columns', array( $this, 'group_column_header'),10,1 );
 		add_action( 'manage_group_custom_column', array( $this, 'group_column_value'),10,3 );
 
 
 
-		add_filter( '@TODO', array( $this, 'filter_method_name' ) );
+		
 
 	}
 
@@ -199,6 +195,11 @@ class Polaroids_Gallery {
 
 	}
 
+
+
+
+
+
 	/**
 	 * Fired when a new site is activated with a WPMU environment.
 	 *
@@ -217,6 +218,12 @@ class Polaroids_Gallery {
 		restore_current_blog();
 
 	}
+
+
+
+
+
+
 
 	/**
 	 * Get all blog ids of blogs in the current network that are:
@@ -250,6 +257,11 @@ class Polaroids_Gallery {
 		// @TODO: Define activation functionality here
 	}
 
+
+
+
+
+
 	/**
 	 * Fired for each blog when the plugin is deactivated.
 	 *
@@ -259,11 +271,16 @@ class Polaroids_Gallery {
 		// @TODO: Define deactivation functionality here
 	}
 
-	/**
-	 * Load the plugin text domain for translation.
-	 *
-	 * @since    1.0.0
-	 */
+
+	public function add_mordernizr($output) {
+	    return $output . ' class="no-js"';
+	}
+
+
+
+
+
+
 	public function load_plugin_textdomain() {
 
 		$domain = $this->plugin_slug;
@@ -274,11 +291,14 @@ class Polaroids_Gallery {
 
 	}
 
-	/**
-	 * Register and enqueue public-facing style sheet.
-	 *
-	 * @since    1.0.0
-	 */
+
+
+
+
+
+
+
+
 	public function enqueue_styles() {
 		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
 	}
@@ -286,38 +306,45 @@ class Polaroids_Gallery {
 
 
 
+	// Register Script
+	public function add_custom_scripts() {
+	
 
-	/**
-	 * Register and enqueues public-facing JavaScript files.
-	 *
-	 * @since    1.0.0
-	 */
+		wp_register_script( 'mordernizr', plugins_url('assets/js/modernizr.js', __FILE__), false, false, false );
+		wp_enqueue_script( 'mordernizr' );
 
-	public function load_mod() {
-	    wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/modernizr.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		 wp_enqueue_script( 'jquery' );
+
+		wp_register_script( 'public', plugins_url('assets/js/public.js', __FILE__), false, false, true );
+		wp_enqueue_script( 'public' );
+
 	}
 
 
-	public function enqueue_scripts() {
-		
 
-		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
-	}
 
-	/**
-	 * NOTE:  Actions are points in the execution of a page or process
-	 *        lifecycle that WordPress fires.
-	 *
-	 *        Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *        Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    1.0.0
-	 */
+
+
+
+
+
+
+
+
+
+
 	public function add_slider_post_type() {
 
 
 
 	}
+
+
+
+
+
+
+
 
 	public function group_column_header($columns)  
 	{  
@@ -334,6 +361,11 @@ class Polaroids_Gallery {
 
 	    return $columns;  
 	} 
+
+
+
+
+
 
 
 	function group_column_value($empty = '', $custom_column, $term_id)   
